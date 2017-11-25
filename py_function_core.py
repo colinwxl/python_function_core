@@ -9,6 +9,7 @@ import gzip
 import bz2
 import zipfile
 import tarfile
+import requests
 #  import pandas as pd
 #  import codecs
 
@@ -45,6 +46,11 @@ def list2dict(lst, n=0, ncol=0, isnum = False):
 def file_nth_col2list(fname,n=0):
     with open(fname,'r') as f:
         return [line.strip().split(getSep(fname))[n] for line in f]
+
+def lst2file(lst,fname):
+    with open(fname,'w') as f:
+        for i in lst:
+            f.write(str(i)+'\n')
 
 def is_list(items):
         return type(items) is list
