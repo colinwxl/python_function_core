@@ -146,17 +146,3 @@ class KEGG:
             for pa,pb in edges_list:
                 fout.write('\t'.join([pa,pb])+'\n')
 
-def main(fin,fout="D:/work/DREAM2/drug_info/drug_target_pathway.txt"):
-    ke = KEGG()
-    fout = open(fout,'w')
-    fout.write('\t'.join(["#Drug","Targets","Pathway"])+"\n")
-    with open(fin,'r') as f:
-        for line in islice(f, 1, None):
-            drug, target = line.strip().split("\t")
-            targets = target.split(',')
-            geneids = ke.symbol2geneid(targets)
-            items = ke.get_item(geneids)
-            pathways = ke.get_allpathway()
-            fout.write('\t'.join([drug,target,','.join(pathways)])+'\n')
-    fout.close()
-# main("D:/work/DREAM2/drug_info/drug_targets.txt")
